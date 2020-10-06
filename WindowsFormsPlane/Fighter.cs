@@ -25,11 +25,11 @@ namespace WindowsFormsPlane
         /// <summary>
         /// Максимальная скорость
         /// </summary>
-        public int MaxSpeed { protected set; get; }
+        public int MaxSpeed { private set; get; }
 
-        public float Weight { protected set; get; }
+        public float Weight { private set; get; }
 
-        public Color MainColor { protected set; get; }
+        public Color MainColor { private set; get; }
 
         public void SetPosition(int x, int y, int width, int height)
         {
