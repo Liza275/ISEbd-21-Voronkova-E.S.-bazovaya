@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsPlane
 {
-    
         public enum Direction
         {
             Up,
@@ -14,5 +13,4 @@ namespace WindowsFormsPlane
             Left,
             Right
         }
-    
 }

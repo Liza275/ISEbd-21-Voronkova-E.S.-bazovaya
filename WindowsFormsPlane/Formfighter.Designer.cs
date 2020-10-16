@@ -34,6 +34,7 @@
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
+            this.buttonCreateWarplane = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxfighter)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,6 @@
             this.pictureBoxfighter.Size = new System.Drawing.Size(892, 455);
             this.pictureBoxfighter.TabIndex = 0;
             this.pictureBoxfighter.TabStop = false;
-            
             // 
             // buttonCreateFighter
             // 
@@ -53,7 +53,7 @@
             this.buttonCreateFighter.Name = "buttonCreateFighter";
             this.buttonCreateFighter.Size = new System.Drawing.Size(105, 54);
             this.buttonCreateFighter.TabIndex = 1;
-            this.buttonCreateFighter.Text = "Создать";
+            this.buttonCreateFighter.Text = "Истребитель";
             this.buttonCreateFighter.UseVisualStyleBackColor = true;
             this.buttonCreateFighter.Click += new System.EventHandler(this.ButtonCreateFighter_Click);
             // 
@@ -105,11 +105,22 @@
             this.buttonRight.UseVisualStyleBackColor = true;
             this.buttonRight.Click += new System.EventHandler(this.ButtonMove_Click);
             // 
+            // buttonCreateWarplane
+            // 
+            this.buttonCreateWarplane.Location = new System.Drawing.Point(753, 12);
+            this.buttonCreateWarplane.Name = "buttonCreateWarplane";
+            this.buttonCreateWarplane.Size = new System.Drawing.Size(105, 54);
+            this.buttonCreateWarplane.TabIndex = 6;
+            this.buttonCreateWarplane.Text = "Военный самолет";
+            this.buttonCreateWarplane.UseVisualStyleBackColor = true;
+            this.buttonCreateWarplane.Click += new System.EventHandler(this.ButtonCreateWarplane_Click);
+            // 
             // Formfighter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 455);
+            this.Controls.Add(this.buttonCreateWarplane);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonUp);
@@ -132,6 +143,7 @@
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.Button buttonLeft;
         private System.Windows.Forms.Button buttonRight;
+        private System.Windows.Forms.Button buttonCreateWarplane;
     }
 }
 
