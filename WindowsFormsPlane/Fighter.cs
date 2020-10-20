@@ -9,21 +9,22 @@ namespace WindowsFormsPlane
 {
     public class Fighter : Warplane
     {
-        public Color DopColor { private set; get; }
+        public Color DopColor { private set; get; }
         public bool isEngines { private set; get; }
 
         public bool isRockets { private set; get; }
-        
- public Fighter(int maxSpeed, float weight, Color mainColor, Color dopColor, bool IsEngines, bool IsRockets):
+        public Fighter(int maxSpeed, float weight, Color mainColor, Color dopColor, bool IsEngines, bool IsRockets) :
             base(maxSpeed, weight, mainColor, 113, 128)
         {
             DopColor = dopColor;
             isEngines = IsEngines;
             isRockets = IsRockets;
         }
-        
+
         public override void DrawTransport(Graphics g)
-        {                       base.DrawTransport(g);
+        {
+            base.DrawTransport(g);
+
             Brush dopBrush = new SolidBrush(DopColor);
             if (isRockets)
             {
@@ -43,7 +44,8 @@ namespace WindowsFormsPlane
                 downRocket[2].X = _startPosX + 56;
                 downRocket[2].Y = _startPosY + 20;
                 g.FillPolygon(dopBrush, downRocket);
-            }         
+            }
+
             if (isEngines)
             {
                 g.FillRectangle(dopBrush, _startPosX + 104, _startPosY - 8, 9, 7);

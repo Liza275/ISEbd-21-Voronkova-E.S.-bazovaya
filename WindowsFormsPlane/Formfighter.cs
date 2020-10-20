@@ -13,12 +13,15 @@ namespace WindowsFormsPlane
     public partial class Formfighter : Form
     {
         private IFlyingTransport warplane;
-
         public Formfighter()
         {
             InitializeComponent();
         }
-
+        public void SetWarplane(IFlyingTransport warplane)
+        {
+            this.warplane = warplane;
+            Draw();
+        }
         private void Draw()
         {
             Bitmap bmp = new Bitmap(pictureBoxfighter.Width, pictureBoxfighter.Height);
@@ -26,16 +29,15 @@ namespace WindowsFormsPlane
             warplane.DrawTransport(gr);
             pictureBoxfighter.Image = bmp;
         }
-
         private void ButtonCreateWarplane_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
             warplane = new Warplane(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.ForestGreen);
+
             warplane.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxfighter.Width,
             pictureBoxfighter.Height);
             Draw();
         }
-
         private void ButtonCreateFighter_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
@@ -45,7 +47,12 @@ namespace WindowsFormsPlane
            pictureBoxfighter.Height);
             Draw();
         }
-        
+        private void ButtonCreate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
         private void ButtonMove_Click(object sender, EventArgs e)
         {
             string name = (sender as Button).Name;
@@ -66,6 +73,8 @@ namespace WindowsFormsPlane
             }
             Draw();
 
-        }       
+        }
+
+
     }
 }

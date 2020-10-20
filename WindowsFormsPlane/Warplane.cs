@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsPlane
 {
-   public class Warplane : Plane
-   {
+    public class Warplane : Plane
+    {
         protected readonly int warplaneWidth = 113;
 
         protected readonly int warplaneHeight = 128;
@@ -40,7 +40,6 @@ namespace WindowsFormsPlane
                     if (_startPosX + step < _pictureWidth - warplaneWidth)
                     {
                         _startPosX += step;
-
                     }
                     break;
                 //влево
@@ -65,10 +64,11 @@ namespace WindowsFormsPlane
                     }
                     break;
             }
-        }        public override void DrawTransport(Graphics g)
+        }
+
+        public override void DrawTransport(Graphics g)
         {
             Brush mainBrush = new SolidBrush(MainColor);
-           
             PointF[] nose = new PointF[3];
             nose[0].X = _startPosX;
             nose[0].Y = _startPosY;
@@ -113,9 +113,6 @@ namespace WindowsFormsPlane
             upSmallWing[2].Y = _startPosY - 8;
             g.FillPolygon(mainBrush, upSmallWing);
             g.FillEllipse(new SolidBrush(Color.Blue), _startPosX + 28, _startPosY - 6, 16, 12);
-
         }
-   }
+    }
 }
-    
-

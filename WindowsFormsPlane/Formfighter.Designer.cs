@@ -107,7 +107,7 @@
             // 
             // buttonCreateWarplane
             // 
-            this.buttonCreateWarplane.Location = new System.Drawing.Point(753, 12);
+            this.buttonCreateWarplane.Location = new System.Drawing.Point(141, 12);
             this.buttonCreateWarplane.Name = "buttonCreateWarplane";
             this.buttonCreateWarplane.Size = new System.Drawing.Size(105, 54);
             this.buttonCreateWarplane.TabIndex = 6;
@@ -120,13 +120,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 455);
-            this.Controls.Add(this.buttonCreateWarplane);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.buttonDown);
-            this.Controls.Add(this.buttonCreateFighter);
             this.Controls.Add(this.pictureBoxfighter);
+            this.Controls.Add(this.buttonCreateWarplane);
+            this.Controls.Add(this.buttonCreateFighter);
             this.Name = "Formfighter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Истребитель";

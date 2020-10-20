@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsPlane
 {
-        public enum Direction
-        {
-            Up,
-            Down,
-            Left,
-            Right
-        }
+    public enum Direction
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
 }
