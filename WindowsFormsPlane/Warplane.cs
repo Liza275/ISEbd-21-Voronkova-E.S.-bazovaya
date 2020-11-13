@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsPlane
 {
-    public class Warplane : Plane
+    public class WarPlane : Plane
     {
         protected readonly int warplaneWidth = 113;
 
         protected readonly int warplaneHeight = 128;
 
-        public Warplane(int maxSpeed, float weight, Color mainColor)
+        public WarPlane(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
         }
 
-        protected Warplane(int maxSpeed, float weight, Color mainColor, int warplaneWidth, int
+        protected WarPlane(int maxSpeed, float weight, Color mainColor, int warplaneWidth, int
        warplaneHeight)
         {
             MaxSpeed = maxSpeed;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsPlane
 {
-    public class Fighter : Warplane
+    public class Fighter : WarPlane
     {
         public Color DopColor { private set; get; }
         public bool isEngines { private set; get; }
@@ -51,6 +51,10 @@ namespace WindowsFormsPlane
                 g.FillRectangle(dopBrush, _startPosX + 104, _startPosY - 8, 9, 7);
                 g.FillRectangle(dopBrush, _startPosX + 104, _startPosY + 1, 9, 7);
             }
+        }
+        public void SetDopColor( Color color)
+        {
+            DopColor = color;
         }
     }
 }
