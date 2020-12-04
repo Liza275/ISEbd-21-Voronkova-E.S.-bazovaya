@@ -13,7 +13,9 @@ namespace WindowsFormsPlane
     public partial class FormPlaneConfig : Form
     {
         Plane plane = null;
+
         private event Action<Plane> eventAddPlane;
+
         public FormPlaneConfig()
         {
             InitializeComponent();
@@ -27,6 +29,7 @@ namespace WindowsFormsPlane
             panelYellowColor.MouseDown += PanelColor_MouseDown;
             buttonCancel.Click += (object sender, EventArgs e) => { Close(); };
         }
+
         private void DrawPlane()
         {
             if (plane != null)

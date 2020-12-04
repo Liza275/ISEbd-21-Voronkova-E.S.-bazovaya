@@ -130,6 +130,7 @@
             this.Name = "Formfighter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Истребитель";
+          
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxfighter)).EndInit();
             this.ResumeLayout(false);
 

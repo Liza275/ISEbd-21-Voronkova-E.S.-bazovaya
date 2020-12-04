@@ -11,8 +11,8 @@ namespace WindowsFormsPlane
     {
         public Color DopColor { private set; get; }
         public bool isEngines { private set; get; }
-
         public bool isRockets { private set; get; }
+
         public Fighter(int maxSpeed, float weight, Color mainColor, Color dopColor, bool IsEngines, bool IsRockets) :
             base(maxSpeed, weight, mainColor, 113, 128)
         {
@@ -21,9 +21,23 @@ namespace WindowsFormsPlane
             isRockets = IsRockets;
         }
 
+        public Fighter(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 6)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                isEngines = Convert.ToBoolean(strs[4]);
+                isRockets = Convert.ToBoolean(strs[5]);
+            }
+        }
         public override void DrawTransport(Graphics g)
         {
             base.DrawTransport(g);
+
             Brush dopBrush = new SolidBrush(DopColor);
             if (isRockets)
             {
@@ -44,6 +58,7 @@ namespace WindowsFormsPlane
                 downRocket[2].Y = _startPosY + 20;
                 g.FillPolygon(dopBrush, downRocket);
             }
+
             if (isEngines)
             {
                 g.FillRectangle(dopBrush, _startPosX + 104, _startPosY - 8, 9, 7);
@@ -53,6 +68,10 @@ namespace WindowsFormsPlane
         public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+        public override string ToString()
+        {
+            return $"{base.ToString()}{separator}{DopColor.Name}{separator}{isEngines}{separator}{isRockets}";
         }
     }
 }

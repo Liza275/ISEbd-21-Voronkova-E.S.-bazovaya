@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxParameter = new System.Windows.Forms.GroupBox();
             this.checkBoxEngines = new System.Windows.Forms.CheckBox();
             this.checkBoxBombs = new System.Windows.Forms.CheckBox();
             this.numericUpDownWeight = new System.Windows.Forms.NumericUpDown();
@@ -53,7 +53,7 @@
             this.panelLimeColor = new System.Windows.Forms.Panel();
             this.panelYellowColor = new System.Windows.Forms.Panel();
             this.panelRedColor = new System.Windows.Forms.Panel();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxParameter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay)).BeginInit();
@@ -62,20 +62,20 @@
             this.groupBoxColors.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // groupBoxParameter
             // 
-            this.groupBox1.Controls.Add(this.checkBoxEngines);
-            this.groupBox1.Controls.Add(this.checkBoxBombs);
-            this.groupBox1.Controls.Add(this.numericUpDownWeight);
-            this.groupBox1.Controls.Add(this.numericUpDownSpeed);
-            this.groupBox1.Controls.Add(this.labelWeight);
-            this.groupBox1.Controls.Add(this.labelMaxSpeed);
-            this.groupBox1.Location = new System.Drawing.Point(12, 267);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(433, 168);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Параметры";
+            this.groupBoxParameter.Controls.Add(this.checkBoxEngines);
+            this.groupBoxParameter.Controls.Add(this.checkBoxBombs);
+            this.groupBoxParameter.Controls.Add(this.numericUpDownWeight);
+            this.groupBoxParameter.Controls.Add(this.numericUpDownSpeed);
+            this.groupBoxParameter.Controls.Add(this.labelWeight);
+            this.groupBoxParameter.Controls.Add(this.labelMaxSpeed);
+            this.groupBoxParameter.Location = new System.Drawing.Point(12, 267);
+            this.groupBoxParameter.Name = "groupBoxParameter";
+            this.groupBoxParameter.Size = new System.Drawing.Size(433, 168);
+            this.groupBoxParameter.TabIndex = 0;
+            this.groupBoxParameter.TabStop = false;
+            this.groupBoxParameter.Text = "Параметры";
             // 
             // checkBoxEngines
             // 
@@ -245,7 +245,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(228, 57);
             this.buttonCancel.TabIndex = 8;
-            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.Text = "Убрать";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // groupBoxColors
@@ -348,11 +348,11 @@
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.groupBoxTipPlane);
             this.Controls.Add(this.panelwarplane);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxParameter);
             this.Name = "FormPlaneConfig";
             this.Text = "FormPlaneConfig";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxParameter.ResumeLayout(false);
+            this.groupBoxParameter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay)).EndInit();
@@ -365,7 +365,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxParameter;
         private System.Windows.Forms.CheckBox checkBoxEngines;
         private System.Windows.Forms.CheckBox checkBoxBombs;
         private System.Windows.Forms.NumericUpDown numericUpDownWeight;

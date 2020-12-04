@@ -14,6 +14,7 @@ namespace WindowsFormsPlane
     public partial class FormAirport : Form
     {
         private readonly AirportCollection airportCollection;
+
         public FormAirport()
         {
             InitializeComponent();
@@ -53,7 +54,6 @@ namespace WindowsFormsPlane
                 }
                 pictureBoxParking.Image = bmp;
             }
-
         }
         private void buttonTakePlane_Click(object sender, EventArgs e)
         {
@@ -93,10 +93,11 @@ namespace WindowsFormsPlane
                 }
             }
         }
-        private void ListBoxAirports_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBoxParkings_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
         }
+
         private void ButtonAddPlane_Click(object sender, EventArgs e)
         {
             var formPlaneConfig = new FormPlaneConfig();
@@ -114,6 +115,40 @@ namespace WindowsFormsPlane
                 else
                 {
                     MessageBox.Show("Транспорт не удалось поставить");
+                }
+            }
+        }
+        private void СохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (airportCollection.SaveData(saveFileDialog.FileName))
+                {
+                    MessageBox.Show("Сохранение прошло успешно", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void ЗагрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (airportCollection.LoadData(openFileDialog.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
                 }
             }
         }

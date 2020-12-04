@@ -48,7 +48,6 @@ namespace WindowsFormsPlane
             p._places.RemoveAt(index);
             return plane;
         }
-
         public void Draw(Graphics g)
         {
             DrawMarking(g);
@@ -60,7 +59,6 @@ namespace WindowsFormsPlane
                 _places[i]?.DrawTransport(g);
             }
         }
-
         private void DrawMarking(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 3);
@@ -74,6 +72,14 @@ namespace WindowsFormsPlane
                 g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth,
                (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
+        }
+        public T GetNext(int index)
+        {
+            if(index < 0 || index >= _places.Count)
+            {
+                return null;
+            }
+            return _places[index];
         }
     }
 }
