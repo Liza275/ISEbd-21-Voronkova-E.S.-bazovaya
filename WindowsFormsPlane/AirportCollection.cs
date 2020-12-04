@@ -9,19 +9,16 @@ namespace WindowsFormsPlane
     class AirportCollection
     {
         readonly Dictionary<string, Airport<Plane>> parkingStages;
-
         public List<string> Keys => parkingStages.Keys.ToList();
         private readonly int pictureWidth;
         private readonly int pictureHeight;
-
-        public AirportCollection(int pictureWidth, int pictureHeight)
+        public AirportCollection (int pictureWidth,int pictureHeight)
         {
             parkingStages = new Dictionary<string, Airport<Plane>>();
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
         }
-
-        public void AddParking(string name)
+        public void AddAirport(string name)
         {
             if (parkingStages.ContainsKey(name))
             {
@@ -30,14 +27,13 @@ namespace WindowsFormsPlane
             parkingStages.Add(name, new Airport<Plane>(pictureWidth, pictureHeight));
         }
 
-        public void DelParking(string name)
+        public void DelAirport(string name)
         {
             if (parkingStages.ContainsKey(name))
             {
                 parkingStages.Remove(name);
             }
         }
-
         public Airport<Plane> this[string ind]
         {
             get
@@ -48,7 +44,6 @@ namespace WindowsFormsPlane
                 }
                 return null;
             }
-
         }
     }
 }

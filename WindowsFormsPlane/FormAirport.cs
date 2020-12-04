@@ -14,14 +14,12 @@ namespace WindowsFormsPlane
     public partial class FormAirport : Form
     {
         private readonly AirportCollection airportCollection;
-
         public FormAirport()
         {
             InitializeComponent();
-            airportCollection = new AirportCollection(pictureBoxAirport.Width, pictureBoxAirport.Height);
+            airportCollection = new AirportCollection(pictureBoxParking.Width, pictureBoxParking.Height);
             Draw();
         }
-
         private void ReloadLevels()
         {
             int index = listBoxAiports.SelectedIndex;
@@ -39,12 +37,11 @@ namespace WindowsFormsPlane
                 listBoxAiports.SelectedIndex = index;
             }
         }
-
         private void Draw()
         {
             if (listBoxAiports.SelectedIndex > -1)
             {
-                Bitmap bmp = new Bitmap(pictureBoxAirport.Width, pictureBoxAirport.Height);
+                Bitmap bmp = new Bitmap(pictureBoxParking.Width, pictureBoxParking.Height);
                 Graphics gr = Graphics.FromImage(bmp);
                 if (listBoxAiports.SelectedIndex > -1)
                 {
@@ -52,13 +49,12 @@ namespace WindowsFormsPlane
                 }
                 else
                 {
-                    gr.FillRectangle(new SolidBrush(System.Drawing.Color.Transparent), 0, 0, pictureBoxAirport.Width, pictureBoxAirport.Height);
+                    gr.FillRectangle(new SolidBrush(System.Drawing.Color.Transparent), 0, 0, pictureBoxParking.Width, pictureBoxParking.Height);
                 }
-                pictureBoxAirport.Image = bmp;//000000
+                pictureBoxParking.Image = bmp;
             }
 
         }
-
         private void buttonTakePlane_Click(object sender, EventArgs e)
         {
             if (listBoxAiports.SelectedIndex > -1 && maskedTextBox.Text != "")
@@ -72,10 +68,8 @@ namespace WindowsFormsPlane
                     form.ShowDialog();
                 }
                 Draw();
-
             }
         }
-
         private void ButtonAddAirport_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
@@ -83,70 +77,45 @@ namespace WindowsFormsPlane
                 MessageBox.Show("Введите название парковки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            airportCollection.AddParking(textBoxNewLevelName.Text);
+            airportCollection.AddAirport(textBoxNewLevelName.Text);
             ReloadLevels();
             listBoxAiports.SetSelected(listBoxAiports.Items.Count - 1, true);
             Draw();
         }
-
         private void ButtonDelAirport_Click(object sender, EventArgs e)
         {
             if (listBoxAiports.SelectedIndex > -1)
             {
-                if (MessageBox.Show($"Удалить парковку {listBoxAiports.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show($"Удалить парковку {listBoxAiports.SelectedIndex.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    airportCollection.DelParking(listBoxAiports.SelectedItem.ToString());
+                    airportCollection.DelAirport(listBoxAiports.SelectedItem.ToString());
                     ReloadLevels();
                 }
             }
         }
-        private void buttonSetWarplane_Click(object sender, EventArgs e)
-        {
-            if (listBoxAiports.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var warplane = new WarPlane(100, 100, dialog.Color);
-                    if (airportCollection[listBoxAiports.SelectedItem.ToString()] + warplane)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Парковка переполнена");
-                    }
-                }
-            }
-        }
-        private void buttonSetFighter_Click(object sender, EventArgs e)
-        {
-            if (listBoxAiports.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var fighter = new Fighter(100, 100, dialog.Color, dialogDop.Color, true, true);
-
-                        if (airportCollection[listBoxAiports.SelectedItem.ToString()] + fighter)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Парковка переполнена");
-                        }
-                    }
-                }
-            }
-        }
-
-        private void ListBoxParkings_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBoxAirports_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+        private void ButtonAddPlane_Click(object sender, EventArgs e)
+        {
+            var formPlaneConfig = new FormPlaneConfig();
+            formPlaneConfig.AddEvent(AddPlane);
+            formPlaneConfig.Show();
+        }
+        private void AddPlane(Plane plane)
+        {
+            if (plane != null && listBoxAiports.SelectedIndex > -1)
+            {
+                if ((airportCollection[listBoxAiports.SelectedItem.ToString()]) + plane)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Транспорт не удалось поставить");
+                }
+            }
         }
     }
 }

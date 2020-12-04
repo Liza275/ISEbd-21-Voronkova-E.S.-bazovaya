@@ -10,7 +10,6 @@ namespace WindowsFormsPlane
     public class WarPlane : Plane
     {
         protected readonly int warplaneWidth = 113;
-
         protected readonly int warplaneHeight = 128;
 
         public WarPlane(int maxSpeed, float weight, Color mainColor)
@@ -65,7 +64,6 @@ namespace WindowsFormsPlane
                     break;
             }
         }
-
         public override void DrawTransport(Graphics g)
         {
             Brush mainBrush = new SolidBrush(MainColor);

@@ -27,5 +27,7 @@ namespace WindowsFormsPlane
         /// </summary>
         /// <param name="g"></param>
         void DrawTransport(Graphics g);
+        //смена основного цвета
+        void SetMainColor(Color color);
     }
 }

@@ -24,7 +24,6 @@ namespace WindowsFormsPlane
         public override void DrawTransport(Graphics g)
         {
             base.DrawTransport(g);
-
             Brush dopBrush = new SolidBrush(DopColor);
             if (isRockets)
             {
@@ -45,14 +44,13 @@ namespace WindowsFormsPlane
                 downRocket[2].Y = _startPosY + 20;
                 g.FillPolygon(dopBrush, downRocket);
             }
-
             if (isEngines)
             {
                 g.FillRectangle(dopBrush, _startPosX + 104, _startPosY - 8, 9, 7);
                 g.FillRectangle(dopBrush, _startPosX + 104, _startPosY + 1, 9, 7);
             }
         }
-        public void SetDopColor( Color color)
+        public void SetDopColor(Color color)
         {
             DopColor = color;
         }

@@ -49,7 +49,6 @@ namespace WindowsFormsPlane
             return plane;
         }
 
-        //отрисовка парковки
         public void Draw(Graphics g)
         {
             DrawMarking(g);
