@@ -52,14 +52,20 @@ namespace WindowsFormsPlane
                 eventAddPlane += ev;
             }
         }
+
+        //
         private void Labelwarplane_MouseDown(object sender, MouseEventArgs e)
         {
             labelwarplane.DoDragDrop(labelwarplane.Text, DragDropEffects.Move | DragDropEffects.Copy);
         }
+
+        //
         private void Labelfighter_MouseDown(object sender, MouseEventArgs e)
         {
             labelfighter.DoDragDrop(labelfighter.Text, DragDropEffects.Move | DragDropEffects.Copy);
         }
+
+        //
         private void Panelwarplane_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))
@@ -71,6 +77,8 @@ namespace WindowsFormsPlane
                 e.Effect = DragDropEffects.None;
             }
         }
+
+        //
         private void Panelwarplane_DragDrop(object sender, DragEventArgs e)
         {
             switch (e.Data.GetData(DataFormats.Text).ToString())
@@ -84,11 +92,15 @@ namespace WindowsFormsPlane
             }
             DrawPlane();
         }
+
+        //
         private void PanelColor_MouseDown(object sender, MouseEventArgs e)
         {
             Control panelColor = (Control)sender;
             panelColor.DoDragDrop(panelColor.BackColor, DragDropEffects.Move | DragDropEffects.Copy);
         }
+
+        //
         private void labelColor_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(Color)))
@@ -100,6 +112,8 @@ namespace WindowsFormsPlane
                 e.Effect = DragDropEffects.None;
             }
         }
+
+        //
         private void Labelmaincolor_DragDrop(object sender, DragEventArgs e)
         {
             if (plane != null)
@@ -108,6 +122,8 @@ namespace WindowsFormsPlane
                 DrawPlane();
             }
         }
+
+        //
         private void Labeldopcolor_DragDrop(object sender, DragEventArgs e)
         {
             if (plane != null)
@@ -123,6 +139,7 @@ namespace WindowsFormsPlane
                 DrawPlane();
             }
         }
+
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             eventAddPlane?.Invoke(plane);

@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using NLog;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
+using System.IO;
 
 namespace WindowsFormsPlane
 {
     public partial class FormAirport : Form
     {
         private readonly AirportCollection airportCollection;
-
+        private readonly Logger logger;
         public FormAirport()
         {
             InitializeComponent();
             airportCollection = new AirportCollection(pictureBoxParking.Width, pictureBoxParking.Height);
             Draw();
+            logger = LogManager.GetCurrentClassLogger();
         }
         private void ReloadLevels()
         {
@@ -59,15 +62,28 @@ namespace WindowsFormsPlane
         {
             if (listBoxAiports.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-
-                var warplane = airportCollection[listBoxAiports.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
-                if (warplane != null)
+                try
                 {
-                    Formfighter form = new Formfighter();
-                    form.SetWarplane(warplane);
-                    form.ShowDialog();
+                    var warplane = airportCollection[listBoxAiports.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
+                    if (warplane != null)
+                    {
+                        Formfighter form = new Formfighter();
+                        form.SetWarplane(warplane);
+                        form.ShowDialog();
+                        logger.Info($"Изъят самолет {warplane} с места {maskedTextBox.Text}");
+                        Draw();
+                    }
                 }
-                Draw();
+                catch (AirportNotFoundException ex)
+                {
+                    logger.Error(ex, ex.Message);
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, ex.Message);
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         private void ButtonAddAirport_Click(object sender, EventArgs e)
@@ -77,6 +93,7 @@ namespace WindowsFormsPlane
                 MessageBox.Show("Введите название парковки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            logger.Info($"Добавили аэропорт{textBoxNewLevelName.Text}");
             airportCollection.AddAirport(textBoxNewLevelName.Text);
             ReloadLevels();
             listBoxAiports.SetSelected(listBoxAiports.Items.Count - 1, true);
@@ -88,13 +105,15 @@ namespace WindowsFormsPlane
             {
                 if (MessageBox.Show($"Удалить парковку {listBoxAiports.SelectedIndex.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    airportCollection.DelAirport(listBoxAiports.SelectedItem.ToString());
+                    logger.Info($"Удали аэропорт{listBoxAiports.SelectedItem.ToString()}");
+                    airportCollection.DelAirport(textBoxNewLevelName.Text);
                     ReloadLevels();
                 }
             }
         }
         private void ListBoxParkings_SelectedIndexChanged(object sender, EventArgs e)
         {
+            logger.Info($"Перешли на парковку{listBoxAiports.SelectedItem.ToString()}");
             Draw();
         }
 
@@ -108,13 +127,26 @@ namespace WindowsFormsPlane
         {
             if (plane != null && listBoxAiports.SelectedIndex > -1)
             {
-                if ((airportCollection[listBoxAiports.SelectedItem.ToString()]) + plane)
+                try
                 {
-                    Draw();
+                    if ((airportCollection[listBoxAiports.SelectedItem.ToString()]) + plane)
+                    {
+                        Draw();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Транспорт не удалось поставить");
+                    }
                 }
-                else
+                catch (AirportOverflowException ex)
                 {
-                    MessageBox.Show("Транспорт не удалось поставить");
+                    logger.Error(ex, ex.Message);
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, ex.Message);
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -122,14 +154,17 @@ namespace WindowsFormsPlane
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (airportCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
+                    airportCollection.SaveData(saveFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат",
+                    logger.Error(ex, ex.Message);
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -138,19 +173,39 @@ namespace WindowsFormsPlane
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (airportCollection.LoadData(openFileDialog.FileName))
+                try
                 {
+                    airportCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
-                   MessageBoxIcon.Information);
+                    MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
                 }
-                else
+                catch (AirportOverflowException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    logger.Error(ex, ex.Message);
+                    MessageBox.Show(ex.Message, "Некорректный формат файла", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    logger.Error(ex, ex.Message);
+                    MessageBox.Show(ex.Message, "Файл не найден", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (FormatException ex)
+                {
+                    logger.Error(ex, ex.Message);
+                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, ex.Message);
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
     }
 }
+

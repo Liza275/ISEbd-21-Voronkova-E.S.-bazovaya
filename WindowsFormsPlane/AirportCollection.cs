@@ -36,6 +36,7 @@ namespace WindowsFormsPlane
                 parkingStages.Remove(name);
             }
         }
+        
         public Airport<Plane> this[string ind]
         {
             get
@@ -46,8 +47,9 @@ namespace WindowsFormsPlane
                 }
                 return null;
             }
+
         }
-        public bool SaveData(string filename)
+        public void SaveData(string filename)
         {
             if (File.Exists(filename))
             {
@@ -77,13 +79,12 @@ namespace WindowsFormsPlane
                     }
                 }
             }
-            return true;
         }
-        public bool LoadData(string filename)
+        public void LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             using (StreamReader sr = new StreamReader(filename, System.Text.Encoding.UTF8))
             {
@@ -94,7 +95,7 @@ namespace WindowsFormsPlane
                 }
                 else
                 {
-                    return false;
+                    throw new FormatException();
                 }
                 Plane plane = null;
                 string key = string.Empty;
@@ -122,11 +123,10 @@ namespace WindowsFormsPlane
                     var result = parkingStages[key] + plane;
                     if (!result)
                     {
-                        return false;
+                        throw new AirportOverflowException();
                     }
                 }
             }
-            return true;
         }
     }
 }

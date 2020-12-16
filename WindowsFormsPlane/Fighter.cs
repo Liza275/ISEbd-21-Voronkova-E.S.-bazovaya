@@ -69,6 +69,7 @@ namespace WindowsFormsPlane
         {
             DopColor = color;
         }
+
         public override string ToString()
         {
             return $"{base.ToString()}{separator}{DopColor.Name}{separator}{isEngines}{separator}{isRockets}";

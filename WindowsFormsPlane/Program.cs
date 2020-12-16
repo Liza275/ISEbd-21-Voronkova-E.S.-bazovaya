@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsPlane
 {
+
     static class Program
     {
         /// <summary>

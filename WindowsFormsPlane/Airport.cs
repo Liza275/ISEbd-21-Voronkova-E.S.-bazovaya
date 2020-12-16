@@ -32,7 +32,7 @@ namespace WindowsFormsPlane
         {
             if (p._places.Count >= p._maxCount)
             {
-                return false;
+                throw new AirportOverflowException();
             }
             p._places.Add(plane);
             return true;
@@ -40,14 +40,16 @@ namespace WindowsFormsPlane
 
         public static T operator -(Airport<T> p, int index)
         {
-            if (index < -1 || index > p._places.Count)
+            if (index < -1 || index >= p._places.Count)
             {
-                return null;
+                throw new AirportNotFoundException(index);
             }
             T plane = p._places[index];
             p._places.RemoveAt(index);
             return plane;
         }
+
+        //отрисовка парковки
         public void Draw(Graphics g)
         {
             DrawMarking(g);
@@ -59,6 +61,7 @@ namespace WindowsFormsPlane
                 _places[i]?.DrawTransport(g);
             }
         }
+
         private void DrawMarking(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 3);
@@ -73,6 +76,7 @@ namespace WindowsFormsPlane
                (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
         }
+
         public T GetNext(int index)
         {
             if(index < 0 || index >= _places.Count)

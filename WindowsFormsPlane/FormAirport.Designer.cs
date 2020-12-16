@@ -34,7 +34,7 @@
             this.maskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.labelPlace = new System.Windows.Forms.Label();
             this.listBoxAiports = new System.Windows.Forms.ListBox();
-            this.labelAirport = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.buttonAddAirport = new System.Windows.Forms.Button();
             this.textBoxNewLevelName = new System.Windows.Forms.TextBox();
             this.buttonDelAirport = new System.Windows.Forms.Button();
@@ -106,14 +106,14 @@
             this.listBoxAiports.TabIndex = 4;
             this.listBoxAiports.SelectedIndexChanged += new System.EventHandler(this.ListBoxParkings_SelectedIndexChanged);
             // 
-            // labelAirport
+            // label2
             // 
-            this.labelAirport.AutoSize = true;
-            this.labelAirport.Location = new System.Drawing.Point(835, 33);
-            this.labelAirport.Name = "labelAirport";
-            this.labelAirport.Size = new System.Drawing.Size(71, 17);
-            this.labelAirport.TabIndex = 5;
-            this.labelAirport.Text = "Аэропорт";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(835, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 17);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Аэропорт";
             // 
             // buttonAddAirport
             // 
@@ -204,7 +204,7 @@
             this.Controls.Add(this.buttonDelAirport);
             this.Controls.Add(this.textBoxNewLevelName);
             this.Controls.Add(this.buttonAddAirport);
-            this.Controls.Add(this.labelAirport);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.listBoxAiports);
             this.Controls.Add(this.groupBoxPlane);
             this.Controls.Add(this.pictureBoxParking);
@@ -231,7 +231,7 @@
         private System.Windows.Forms.MaskedTextBox maskedTextBox;
         private System.Windows.Forms.Label labelPlace;
         private System.Windows.Forms.ListBox listBoxAiports;
-        private System.Windows.Forms.Label labelAirport;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonAddAirport;
         private System.Windows.Forms.TextBox textBoxNewLevelName;
         private System.Windows.Forms.Button buttonDelAirport;

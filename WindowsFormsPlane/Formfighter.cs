@@ -47,6 +47,12 @@ namespace WindowsFormsPlane
            pictureBoxfighter.Height);
             Draw();
         }
+        private void ButtonCreate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
         private void ButtonMove_Click(object sender, EventArgs e)
         {
             string name = (sender as Button).Name;
@@ -68,5 +74,7 @@ namespace WindowsFormsPlane
             Draw();
 
         }
+
+
     }
 }
