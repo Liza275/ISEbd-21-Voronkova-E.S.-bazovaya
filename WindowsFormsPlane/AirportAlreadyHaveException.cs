@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsPlane
 {
-    public class AirportNotFoundException : Exception
+    class AirportAlreadyHaveException: Exception
     {
-        public AirportNotFoundException(int i) : base("Не найден самолет по месту " + i)
+        public AirportAlreadyHaveException() : base("В аэропорту уже есть такой самолет")
         {
-
         }
-    }
+    }    
 }

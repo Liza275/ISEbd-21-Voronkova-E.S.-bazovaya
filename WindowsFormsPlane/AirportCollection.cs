@@ -36,7 +36,7 @@ namespace WindowsFormsPlane
                 parkingStages.Remove(name);
             }
         }
-        
+
         public Airport<Plane> this[string ind]
         {
             get
@@ -61,10 +61,9 @@ namespace WindowsFormsPlane
                 foreach (var level in parkingStages)
                 {
                     sw.WriteLine($"Airport{separator}{level.Key}");
-                    IFlyingTransport plane = null;
-                    for (int i = 0; (plane = level.Value.GetNext(i)) != null; i++)
+                    foreach (IFlyingTransport plane in level.Value)
                     {
-                        if (plane != null) 
+                        if (plane != null)
                         {
                             if (plane.GetType().Name == "WarPlane")
                             {

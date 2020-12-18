@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsPlane
 {
-    public class Airport<T> where T : class, IFlyingTransport
+    public class Airport<T> : IEnumerator<T>, IEnumerable<T>
+        where T : class, IFlyingTransport
     {
         private readonly List<T> _places;
         private readonly int pictureWidth;
@@ -16,7 +18,9 @@ namespace WindowsFormsPlane
         private readonly int _placeSizeWidth = 215;
         private readonly int _placeSizeHeight = 137;
         private readonly int placesInRow;
-
+        private int _currentIndex;
+        public T Current => _places[_currentIndex];
+        object IEnumerator.Current => _places[_currentIndex];
         public Airport(int picWidht, int picHeight)
         {
             int widht = picWidht / _placeSizeWidth;
@@ -26,6 +30,7 @@ namespace WindowsFormsPlane
             _places = new List<T>();
             pictureWidth = picWidht;
             pictureHeight = picHeight;
+            _currentIndex = -1;
         }
 
         public static bool operator +(Airport<T> p, T plane)
@@ -33,6 +38,10 @@ namespace WindowsFormsPlane
             if (p._places.Count >= p._maxCount)
             {
                 throw new AirportOverflowException();
+            }
+            if (p._places.Contains(plane))
+            {
+                throw new AirportAlreadyHaveException();
             }
             p._places.Add(plane);
             return true;
@@ -56,8 +65,8 @@ namespace WindowsFormsPlane
             for (int i = 0; i < _places.Count; i++)
             {
                 int x = (i / placesInRow) * _placeSizeWidth;
-                int y = (i - placesInRow * (i / placesInRow)) * _placeSizeHeight + (_placeSizeHeight-5) / 2;
-                _places[i]?.SetPosition(x+5, y+5, pictureWidth, pictureHeight);
+                int y = (i - placesInRow * (i / placesInRow)) * _placeSizeHeight + (_placeSizeHeight - 5) / 2;
+                _places[i]?.SetPosition(x + 5, y + 5, pictureWidth, pictureHeight);
                 _places[i]?.DrawTransport(g);
             }
         }
@@ -79,11 +88,37 @@ namespace WindowsFormsPlane
 
         public T GetNext(int index)
         {
-            if(index < 0 || index >= _places.Count)
+            if (index < 0 || index >= _places.Count)
             {
                 return null;
             }
             return _places[index];
+        }
+        public void Sort() => _places.Sort((IComparer<T>)new PlaneComparer());
+
+        public void Dispose()
+        {
+        }
+
+        public bool MoveNext()
+        {
+            _currentIndex++;
+            return (_currentIndex < _places.Count);
+        }
+
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsPlane
 {
-    public class Fighter : WarPlane
+    public class Fighter : WarPlane, IEquatable<Fighter>
     {
         public Color DopColor { private set; get; }
         public bool isEngines { private set; get; }
@@ -73,6 +73,57 @@ namespace WindowsFormsPlane
         public override string ToString()
         {
             return $"{base.ToString()}{separator}{DopColor.Name}{separator}{isEngines}{separator}{isRockets}";
+        }
+        public bool Equals (Fighter other)
+        {
+            if(other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (isEngines != other.isEngines)
+            {
+                return false;
+            }
+            if (isRockets != other.isRockets)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override bool Equals(object obj)
+        {
+            if(obj== null)
+            {
+                return false;
+            }
+            if (!(obj is Fighter warplaneObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(warplaneObj);
+            }
         }
     }
 }

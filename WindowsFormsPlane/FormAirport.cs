@@ -206,6 +206,16 @@ namespace WindowsFormsPlane
                 }
             }
         }
+
+        private void ButtinSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxAiports.SelectedIndex > -1)
+            {
+                airportCollection[listBoxAiports.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
+            }
+        }
     }
 }
 
